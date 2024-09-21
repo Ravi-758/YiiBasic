@@ -18,7 +18,7 @@ $this->title = 'Enter Your Details';
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-
+    <?= $form->field($model, 'image_upload')->fileInput() ?>
     <div class="form-group">
         <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
     </div>

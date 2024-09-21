@@ -21,4 +21,20 @@ class UserController extends Controller
             'model' => $model,
         ]);
     }
+    public function actionUpload()
+    {
+        $model = new ImageUploadForm();
+
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            
+            if ($filePath = $model->upload()) {
+                // You can save the file path to the database or perform other actions
+                Yii::$app->session->setFlash('success', 'File uploaded successfully: ' . $filePath);
+                return $this->redirect(['upload']);
+            }
+        }
+
+        return $this->render('upload', ['model' => $model]);
+    }
 }
