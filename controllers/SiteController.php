@@ -10,6 +10,8 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\UploadForm;
+
+use app\models\Posts;
 class SiteController extends Controller
 {
     /**
@@ -61,7 +63,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+
+        $posts = Posts::Find()->all();
+        return $this->render('home',['posts'=>$posts]);
     }
 
     /**
