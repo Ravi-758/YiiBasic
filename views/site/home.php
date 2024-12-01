@@ -6,9 +6,14 @@ use \yii\Helpers\HTML;
 $this->title = 'Yii CRUD Application';
 ?>
 <div class="site-index">
-
+    <?php if(yii::$app->session->hasFlash('message')): ?>
+        <?php echo yii::$app->session->getFlash('message'); ?>
+    <?php endif; ?>
     <div class="jumbotron text-center bg-transparent mt-5 mb-5">
         <h1 style="color:#337ab7" class="display-4">YII CRUD Application tutorial!</h1>
+    </div>
+    <div class="row">
+        <span style="magrin-bottom:20px"><?= HTML::a('Create', ['/site/create'] ,['class' => 'btn btn-primary']) ?></span>
     </div>
     <div class="body-content">
         <div class="row">
@@ -32,9 +37,9 @@ $this->title = 'Yii CRUD Application';
                     <td><?php echo $post->description; ?></td>
                     <td><?php echo $post->category; ?></td>
                     <td>
-                        <span><?= HTML::a('View') ?> </span>
-                        <span><?= HTML::a('Update') ?> </span>
-                        <span><?= HTML::a('Delete') ?> </span>
+                        <span><?= HTML::a('View',['view', 'id'=>$post->id],['class'=>' label label-primary']) ?> </span>
+                        <span><?= HTML::a('Update',['update', 'id'=>$post->id],['class'=>' label label-default']) ?> </span>
+                        <span><?= HTML::a('Delete',['delete', 'id'=>$post->id],['class'=>' label label-danger']) ?> </span>
                     </td>
                     </tr>
                     <?php endforeach; ?>

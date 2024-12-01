@@ -89,6 +89,10 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+    public function actionView($id){
+        $post = Posts::findOne($id);
+        return $this->render('view', ['post' => $post]);
+    }
 
     /**
      * Logout action.
@@ -98,9 +102,25 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
+    public function actionCreate()
+    {
+        $post = new Posts();
+        $formData = Yii::$app->request->post();
+
+        if ($post->load($formData)) {
+          if ($post->save()) {
+             Yii::$app->session->setFlash('message', 'Post published successfully');
+             return $this->redirect(['index']);
+            } else {
+            Yii::$app->session->setFlash('message', 'Failed to post');
+            }
+        }
+
+        return $this->render('create', ['post' => $post]);
+    }
+
 
     /**
      * Displays contact page.
