@@ -94,6 +94,25 @@ class SiteController extends Controller
         return $this->render('view', ['post' => $post]);
     }
 
+    public function actionUpdate($id){
+        $post = Posts::findOne($id);
+        if($post->load(Yii::$app->request->post()) && $post->save()){
+            Yii::$app->getSession()->setFlash('message','Updated Succesfully');
+            return $this->redirect(['index','id' => $post->id]);
+        }else{
+        return $this->render('update',['post'=>$post]);
+        }
+    }
+
+    public function actionDelete($id){
+        $post = Posts::findOne($id)->delete();
+        if($post){
+            Yii::$app->getSession()->setFlash('message', 'Post Deleted Successfully');
+            return $this->redirect('index`');
+        }
+        return $this->render('home');
+    }
+
     /**
      * Logout action.
      *

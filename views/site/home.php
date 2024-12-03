@@ -6,8 +6,12 @@ use \yii\Helpers\HTML;
 $this->title = 'Yii CRUD Application';
 ?>
 <div class="site-index">
-    <?php if(yii::$app->session->hasFlash('message')): ?>
-        <?php echo yii::$app->session->getFlash('message'); ?>
+        <?php if(yii::$app->session->hasFlash('message')): ?>
+            <div class="alert alert-dismissible alert-success">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <?php echo yii::$app->session->getFlash('message'); ?>
+            </div>
+       
     <?php endif; ?>
     <div class="jumbotron text-center bg-transparent mt-5 mb-5">
         <h1 style="color:#337ab7" class="display-4">YII CRUD Application tutorial!</h1>
